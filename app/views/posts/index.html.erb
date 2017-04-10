@@ -1,9 +1,68 @@
-<div class="container">
-    <div class="row">
-    <% @posts.each do |f| %>
-        <%= f.id %></br>
-        body: <%= f.tag %> </br>
-        article: <%= f.article %> </p>
+<html>
+  <head>
+    <title>Sungkyunkwan University bamboo</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="posts.scss">
+  </head>
+
+  <body>
+    <header>
+      <nav class="navi">
+        <a href="/posts/new"><figure><%= image_tag 'fbicon.png' %></figure></a>
+      </nav>
+    </header>
+  
+    <div class="container">
+      <div class="page_introduction">
+        <figure><%= image_tag 'img1.jpg' %></figure>
+          <div class="page_name">
+            <h3>성균관대학교<br>
+            멋쟁이 사자처럼<br>
+            대나무숲</h3>
+          </div>
+        </div>
+
+      <div class="texts">
+        <div class="back">
+          <figure><%= image_tag 'back.jpg' %></figure>
+        </div>
+        <div class="write">
+          <%= form_for @post do |f| %>
+            <div class="input">
+              <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name") %><br>  
+              <%= f.text_area :article, rows: 5, cols: 68 %><br>
+            </div>
+            <div class="submit">
+              <%= f.submit '제출' %>
+            </div>
+          <% end %> 
+        </div>
+        <br>
+        <% @posts.each do |f| %>
+        <div class="posted">
+          <div class="article">
+            <div class="title">
+              <figure><%= image_tag 'img1.jpg' %></figure>
+              <div class="title_text">
+                <h4>성균관대 멋사 대나무숲</h4>
+                <p><%= distance_of_time_in_words_to_now(f.created_at) %></p>
+              </div>
+            </div>
+            <div class="content">
+              #<%= f.id %>번째 울림</br>
+              <<%= f.category_id %>> </br>
+              <%= f.article %> </p>
+            </div>
+          </div>
+          <div class="menu">
+            <%= link_to '수정하기', edit_post_path(f) %>
+            <%= link_to '삭제하기', post_path(f), method: :delete, data: {confirm: '정말 삭제하시겠습니까?'} %>
+          </div>
+        </div> 
+          <br>
+      <% end %>
+      </div>
     </div>
-    <% end %>
-</div>
+  </body>
+</html>
+  

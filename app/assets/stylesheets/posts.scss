@@ -68,10 +68,18 @@ nav figure img {
     width: 20%;
 }
 
-.article {
+.posted {
     margin: 0 auto;
     width: 500px;
     border: solid 1px #000;
+}
+
+.menu {
+    padding: 5px;
+    border-top: solid 1px #000;
+    margin: 0 5px 3px auto;
+    width: 100%;
+    text-align: right;
 }
 
 .title {
@@ -94,3 +102,4 @@ nav figure img {
 .content {
     padding: 0 8px;
 }
+

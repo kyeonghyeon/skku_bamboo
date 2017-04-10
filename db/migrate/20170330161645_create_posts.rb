@@ -1,7 +1,7 @@
 class CreatePosts < ActiveRecord::Migration
   def change
     create_table :posts do |t|
-      t.text :tag
+      t.integer :category_id
       t.text :article
       t.timestamps null: false
     end
