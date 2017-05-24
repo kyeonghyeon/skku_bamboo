@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'mechanize'
+
 # heroku
 gem 'rails_12factor', group: :production
 gem 'sqlite3', group: :development

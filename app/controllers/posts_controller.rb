@@ -1,8 +1,12 @@
 class PostsController < ApplicationController
   def index
-    @posts = Post.all
+    # @posts = Post.all
     @post = Post.new
     @categories = Category.all
+    
+    @comment = Comment.new
+    
+    @posts = Post.search(params[:search])
   end
 
   def new
@@ -38,7 +42,7 @@ class PostsController < ApplicationController
 
   private
   def post_params
-    params.require(:post).permit(:article, :category_id)
+    params.require(:post).permit(:article, :category_id, :title)
   end
   
 end

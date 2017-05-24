@@ -2,7 +2,11 @@
   <head>
     <title>Sungkyunkwan University bamboo</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="posts.scss">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -26,8 +30,7 @@
         <div class="back">
           <figure><%= image_tag 'back.jpg' %></figure>
         </div>
-        
-        <br>
+        <!--<div class="modal" id="editModal">-->
         <div class="write">
           <%= form_for @post do |f| %>
             <div class="input">
@@ -39,9 +42,12 @@
             </div>
           <% end %> 
         </div>
-          <br>
+        <!--</div>-->
+        <br>
       </div>
     </div>
   </body>
 </html>
+  
+  
   

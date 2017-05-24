@@ -2,7 +2,11 @@
   <head>
     <title>Sungkyunkwan University bamboo</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="posts.scss">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
 
   <body>
@@ -26,10 +30,19 @@
         <div class="back">
           <figure><%= image_tag 'back.jpg' %></figure>
         </div>
+        <br>
+        <br>
+        <div class="search_form">
+          <%= form_tag posts_path, :method => 'get' do %>
+            <%= text_field_tag :search, params[:search] %>
+            <%= submit_tag "Search", :name => nil %>
+          <% end %>
+        </div>
         <div class="write">
           <%= form_for @post do |f| %>
             <div class="input">
-              <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name") %><br>  
+              <%= f.select :category_id, options_from_collection_for_select(@categories, "id", "name") %><br> 
+              <%= f.text_field :title %><br>
               <%= f.text_area :article, rows: 5, cols: 68 %><br>
             </div>
             <div class="submit">
@@ -51,12 +64,24 @@
             <div class="content">
               #<%= f.id %>번째 울림</br>
               <<%= f.category.name %>> </br>
+              <b><%= f.title %></b><br>
               <%= f.article %> </p>
             </div>
           </div>
           <div class="menu">
-            <%= link_to '수정하기', edit_post_path(f) %> | 
+            <!--%= link_to '수정하기', edit_post_path(f), data: {remote: "true", toggle: "modal", target: "#editModal"} %> | -->
+            <%= link_to '수정하기', edit_post_path(f) %> |  
             <%= link_to '삭제하기', post_path(f), method: :delete, data: {confirm: '정말 삭제하시겠습니까?'} %>
+            <br>
+            <% f.comments.each do |c| %>
+              <%= c.content %><br>
+            <% end %>
+            <div class="comments">
+            <%= form_for @comment, url: post_comments_path(post_id: f.id) do |c| %>
+              <%= c.text_area :content, rows: 1, cols: 67 %><br>
+              <%= c.submit '작성하기' %>
+            <% end %>
+            </div>
           </div>
         </div> 
           <br>
